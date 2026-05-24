@@ -5,112 +5,21 @@ package sigarka;
 
 // File: src/main/java/com/payroll/MainApp.java
 
-import com.sigarka.database.DatabaseManager;
-
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sigarka.scenes.LoginSc;
 
 public class MainApp extends Application {
-    private Stage primaryStage;
 
     @Override
-    public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        DatabaseManager.initializeDatabase(); // Inisialisasi DB SQLite saat start
-        showLoginScene();
-    }
+    public void start(Stage stage) {
 
-    // SCENE 1: Halaman Login (Sesuai Flowchart)
-    public void showLoginScene() {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-
-        Label userLabel = new Label("ID / Username:");
-        grid.add(userLabel, 0, 1);
-        TextField userTextField = new TextField();
-        grid.add(userTextField, 1, 1);
-
-        Label pwLabel = new Label("Password:");
-        grid.add(pwLabel, 0, 2);
-        PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 2);
-
-        Button btn = new Button("Login");
-        grid.add(btn, 1, 4);
-
-        final Label actiontarget = new Label();
-        grid.add(actiontarget, 1, 6);
-
-        btn.setOnAction(e -> {
-            // Validasi ID & PW sederhana sesuai flowchart login
-            if (userTextField.getText().equals("admin") && pwBox.getText().equals("admin123")) {
-                showMainScene();
-            } else {
-                actiontarget.setText("ID atau Password Salah!");
-            }
-        });
-
-        Scene scene = new Scene(grid, 400, 300);
-        primaryStage.setTitle("Sistem Penggajian - Login");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    // SCENE 2: Halaman Utama (Menu Pilihan Flowchart)
-    public void showMainScene() {
-        VBox root = new VBox(15);
-        root.setPadding(new Insets(20));
-        root.setAlignment(Pos.CENTER);
-
-        Label welcomeLabel = new Label("MENU UTAMA SISTEM PENGGAJIAN");
-        welcomeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16px;");
-
-        Button btnKelola = new Button("1. Kelola Data Karyawan");
-        Button btnHitung = new Button("2. Hitung Gaji");
-        Button btnData = new Button("3. Data Karyawan & Slip Gaji");
-        Button btnLogout = new Button("4. Logout");
-
-        btnKelola.setPrefWidth(250);
-        btnHitung.setPrefWidth(250);
-        btnData.setPrefWidth(250);
-        btnLogout.setPrefWidth(250);
-
-        // Aksi Tombol Menu
-        btnKelola.setOnAction(e -> showAlert("Menu Kelola Data", "Fitur Tambah/Hapus data karyawan terhubung ke model Karyawan dan Database."));
-        btnHitung.setOnAction(e -> showAlert("Menu Hitung Gaji", "Proses kalkulasi berbasis Polymorphism sesuai parameter divisi/tipe kerja."));
-        btnData.setOnAction(e -> showAlert("Menu Slip Gaji", "Menampilkan visualisasi tabel rekapitulasi data penggajian karyawan."));
-        
-        btnLogout.setOnAction(e -> showLoginScene()); // Kembali ke login (Kembali ke menu / End)
-
-        root.getChildren().addAll(welcomeLabel, btnKelola, btnHitung, btnData, btnLogout);
-
-        Scene scene = new Scene(root, 500, 400);
-        primaryStage.setTitle("Sistem Penggajian - Dashboard");
-        primaryStage.setScene(scene);
-    }
-
-    private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
+        stage.setTitle("SIGARKA");
+        stage.setScene(LoginSc.createScene(stage));
+        stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 }

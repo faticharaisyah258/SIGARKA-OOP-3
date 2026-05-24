@@ -7,7 +7,7 @@ public abstract class Karyawan {
     private String divisi;
     private String jabatan;
 
-    public Karyawan(String id, String nama, String tipe, String divisi, String jabatan) {
+    public Karyawan(String id, String nama) {
         this.id = id;
         this.nama = nama;
         this.tipe = tipe;
