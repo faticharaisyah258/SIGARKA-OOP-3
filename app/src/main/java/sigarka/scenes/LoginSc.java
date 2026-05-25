@@ -110,19 +110,12 @@ public class LoginSc {
                 stage.setScene(MenuSc.createScene(stage));
             }
 
-            // Username salah
+            // Username atau Password salah
             else if (!username.equals(validUsername) ||
                     !password.equals(validPassword)) {
 
                 info.setTextFill(Color.RED);
                 info.setText("Username atau Password tidak valid!");
-            }
-
-            // Keduanya salah
-            else {
-
-                info.setTextFill(Color.RED);
-                info.setText("Username & Password salah!");
             }
         });
 
