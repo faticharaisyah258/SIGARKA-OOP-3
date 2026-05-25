@@ -1,11 +1,11 @@
 package sigarka.models;
 
 public class KaryawanTetap extends Karyawan {
-    private String divisi;
-    private String jabatan;
     private int alpa;
     private int izin;
     private int lembur;
+    private String divisi;
+    private String jabatan;
 
     public KaryawanTetap(String nama, String id, String divisi, String jabatan, int alpa, int izin, int lembur) {
         super(nama, id);

@@ -13,9 +13,21 @@ public class MenuSc {
 
         Label title = new Label("MENU UTAMA");
 
-        Button btnKaryawan = new Button("Data Karyawan");
-        Button btnGaji = new Button("Data Gaji");
-        Button btnSlip = new Button("Slip Gaji");
+        Button btnKaryawan = new Button("Kelola Data Karyawan");
+        btnKaryawan.setPrefWidth(200);
+
+        btnKaryawan.setStyle(
+                "fx-background-color: #1E4D8F;"+
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 15px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-radius: 12;" +
+                "-fx-padding: 10;"
+        );
+
+        Button btnGaji = new Button("Hitung Gaji");
+        Button btnSlip = new Button("Data Karyawan & Slip Gaji");
+        Button btnLogout = new Button("Logout");
 
         btnKaryawan.setOnAction(e ->
                 stage.setScene(KaryawanSc.createScene(stage)));
@@ -26,6 +38,9 @@ public class MenuSc {
         btnSlip.setOnAction(e ->
                 stage.setScene(SlipGajiSc.createScene(stage)));
 
+        btnLogout.setOnAction(e ->
+                stage.setScene(LoginSc.createScene(stage)));
+
         VBox root = new VBox(15);
         root.setAlignment(Pos.CENTER);
 
@@ -33,7 +48,8 @@ public class MenuSc {
                 title,
                 btnKaryawan,
                 btnGaji,
-                btnSlip
+                btnSlip,
+                btnLogout
         );
 
         return new Scene(root, 500, 400);
