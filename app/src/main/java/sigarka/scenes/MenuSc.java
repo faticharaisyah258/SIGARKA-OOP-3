@@ -18,13 +18,18 @@ public class MenuSc {
     public static Scene createScene(Stage stage) {
 
         // ===== TITLE =====
+        Image logo = new Image(
+                LoginSc.class.getResourceAsStream("/images/logo_menu.png")
+        );
+        ImageView logoView = new ImageView(logo);
+        logoView.setFitWidth(100);
+        logoView.setPreserveRatio(true);
+
         Label title = new Label("MENU UTAMA");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 28));
         title.setTextFill(Color.web("#1E4D8F"));
 
-        Label subtitle = new Label("Sistem Gaji Karyawan");
-        subtitle.setFont(Font.font("Arial", 14));
-        subtitle.setTextFill(Color.web("#4FA89A"));
+        
 
         // ===== BUTTON STYLE =====
         String buttonStyle =
@@ -140,8 +145,8 @@ public class MenuSc {
         );
 
         card.getChildren().addAll(
+                logoView,
                 title,
-                subtitle,
                 btnKaryawan,
                 btnGaji,
                 btnSlip,
