@@ -1,34 +1,117 @@
 package sigarka.scenes;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class MenuSc {
 
     public static Scene createScene(Stage stage) {
 
+        // ===== TITLE =====
         Label title = new Label("MENU UTAMA");
+        title.setFont(Font.font("Arial", FontWeight.BOLD, 28));
+        title.setTextFill(Color.web("#1E4D8F"));
 
-        Button btnKaryawan = new Button("Kelola Data Karyawan");
-        btnKaryawan.setPrefWidth(200);
+        Label subtitle = new Label("Sistem Gaji Karyawan");
+        subtitle.setFont(Font.font("Arial", 14));
+        subtitle.setTextFill(Color.web("#4FA89A"));
 
-        btnKaryawan.setStyle(
-                "fx-background-color: #1E4D8F;"+
+        // ===== BUTTON STYLE =====
+        String buttonStyle =
+                "-fx-background-color: #1E4D8F;" +
                 "-fx-text-fill: white;" +
                 "-fx-font-size: 15px;" +
                 "-fx-font-weight: bold;" +
                 "-fx-background-radius: 12;" +
-                "-fx-padding: 10;"
-        );
+                "-fx-padding: 12;" +
+                "-fx-cursor: hand;";
 
+        String hoverStyle =
+                "-fx-background-color: #4FA89A;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 15px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-radius: 12;" +
+                "-fx-padding: 12;" +
+                "-fx-cursor: hand;";
+
+        // ===== BUTTON =====
+        Button btnKaryawan = new Button("Kelola Data Karyawan");
         Button btnGaji = new Button("Hitung Gaji");
         Button btnSlip = new Button("Data Karyawan & Slip Gaji");
         Button btnLogout = new Button("Logout");
 
+        // Ukuran tombol
+        btnKaryawan.setPrefWidth(280);
+        btnGaji.setPrefWidth(280);
+        btnSlip.setPrefWidth(280);
+        btnLogout.setPrefWidth(280);
+
+        // Style tombol
+        btnKaryawan.setStyle(buttonStyle);
+        btnGaji.setStyle(buttonStyle);
+        btnSlip.setStyle(buttonStyle);
+
+        // Tombol logout beda warna
+        btnLogout.setStyle(
+                "-fx-background-color: #d63031;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 15px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-radius: 12;" +
+                "-fx-padding: 12;" +
+                "-fx-cursor: hand;"
+        );
+
+        // Hover effect
+        Button[] buttons = {btnKaryawan, btnGaji, btnSlip};
+
+        for (Button btn : buttons) {
+
+            btn.setOnMouseEntered(e ->
+                    btn.setStyle(hoverStyle)
+            );
+
+            btn.setOnMouseExited(e ->
+                    btn.setStyle(buttonStyle)
+            );
+        }
+
+        btnLogout.setOnMouseEntered(e ->
+                btnLogout.setStyle(
+                        "-fx-background-color: #ff7675;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-size: 15px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-radius: 12;" +
+                        "-fx-padding: 12;" +
+                        "-fx-cursor: hand;"
+                )
+        );
+
+        btnLogout.setOnMouseExited(e ->
+                btnLogout.setStyle(
+                        "-fx-background-color: #d63031;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-size: 15px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-radius: 12;" +
+                        "-fx-padding: 12;" +
+                        "-fx-cursor: hand;"
+                )
+        );
+
+        // ===== ACTION =====
         btnKaryawan.setOnAction(e ->
                 stage.setScene(KaryawanSc.createScene(stage)));
 
@@ -41,17 +124,38 @@ public class MenuSc {
         btnLogout.setOnAction(e ->
                 stage.setScene(LoginSc.createScene(stage)));
 
-        VBox root = new VBox(15);
-        root.setAlignment(Pos.CENTER);
+        // ===== CARD =====
+        VBox card = new VBox(18);
+        card.setAlignment(Pos.CENTER);
+        card.setPadding(new Insets(35));
+        card.setMaxWidth(450);
 
-        root.getChildren().addAll(
+        card.setStyle(
+                "-fx-background-color: white;" +
+                "-fx-background-radius: 25;" +
+                "-fx-border-radius: 25;" +
+                "-fx-border-color: #D9D9D9;" +
+                "-fx-border-width: 1;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15,0,0,5);"
+        );
+
+        card.getChildren().addAll(
                 title,
+                subtitle,
                 btnKaryawan,
                 btnGaji,
                 btnSlip,
                 btnLogout
         );
 
-        return new Scene(root, 500, 400);
+        // ===== ROOT =====
+        StackPane root = new StackPane();
+        root.setAlignment(Pos.CENTER);
+
+        root.setStyle("-fx-background-color: white;");
+
+        root.getChildren().add(card);
+
+        return new Scene(root, 900, 600);
     }
 }
