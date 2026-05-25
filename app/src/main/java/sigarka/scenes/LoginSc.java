@@ -111,19 +111,11 @@ public class LoginSc {
             }
 
             // Username salah
-            else if (!username.equals(validUsername) &&
-                    password.equals(validPassword)) {
-
-                info.setTextFill(Color.RED);
-                info.setText("Username tidak valid!");
-            }
-
-            // Password salah
-            else if (username.equals(validUsername) &&
+            else if (!username.equals(validUsername) ||
                     !password.equals(validPassword)) {
 
                 info.setTextFill(Color.RED);
-                info.setText("Password tidak valid!");
+                info.setText("Username atau Password tidak valid!");
             }
 
             // Keduanya salah
